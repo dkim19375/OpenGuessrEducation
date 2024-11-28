@@ -13,5 +13,5 @@ WORKDIR /app
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/
 COPY package.json .
-EXPOSE 3000
-CMD ["node", "build"]
+EXPOSE 4173
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]
