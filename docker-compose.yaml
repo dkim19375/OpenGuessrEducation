@@ -2,6 +2,7 @@ services:
   openguessreducation:
     image: openguessreducation
     container_name: openguessreducation
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./Dockerfile
