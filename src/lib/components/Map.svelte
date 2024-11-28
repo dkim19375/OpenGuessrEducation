@@ -624,6 +624,14 @@
                         isInteractive: true,
                         flashColor: "",
                         color: "oklch(var(--s))",
+                        strokeColor: (
+                            name.endsWith("Ocean") ||
+                            name.endsWith("River") ||
+                            name.endsWith("Ocean") ||
+                            name.endsWith("Sea") ||
+                            name.startsWith("Strait") ||
+                            name.startsWith("Lake") ||
+                            name.startsWith("Gulf")) ? "var(--water)" : "oklch(var(--b2))"
                     };
                 },
             );
@@ -717,14 +725,7 @@
                                     onmouseenter={() => (point.isHovered = true)}
                                     onmouseleave={() => (point.isHovered = false)}
                                     class="point-feature"
-                                    stroke={(
-                                    point.properties.name.endsWith("Ocean") ||
-                                    point.properties.name.endsWith("River") ||
-                                    point.properties.name.endsWith("Ocean") ||
-                                    point.properties.name.endsWith("Sea") ||
-                                    point.properties.name.startsWith("Strait") ||
-                                    point.properties.name.startsWith("Lake") ||
-                                    point.properties.name.startsWith("Gulf")) ? "var(--water)" : "oklch(var(--b2))"}
+                                    stroke={point.strokeColor}
                                     stroke-width="2"
                                     transform={`translate(${point.x},${point.y})`}>
                                 <circle

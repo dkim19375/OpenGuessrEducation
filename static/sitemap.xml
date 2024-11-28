@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://education.openguessr.com/africa\</loc>
-        <lastmod>2024-11-28</lastmod>
-    </url>
-    <url>
-        <loc>https://education.openguessr.com/tools\acquire-embed-links\</loc>
-        <lastmod>2024-11-28</lastmod>
-    </url>
-    <url>
-        <loc>https://education.openguessr.com/tools\map-converter\</loc>
-        <lastmod>2024-11-28</lastmod>
-    </url>
-    <url>
-        <loc>https://education.openguessr.com/tools\markdown-to-code\</loc>
-        <lastmod>2024-11-28</lastmod>
-    </url>
+  <url>
+    <loc>https://education.openguessr.com/africa\</loc>
+    <lastmod>2024-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://education.openguessr.com/tools\acquire-embed-links\</loc>
+    <lastmod>2024-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://education.openguessr.com/tools\map-converter\</loc>
+    <lastmod>2024-11-28</lastmod>
+  </url>
+  <url>
+    <loc>https://education.openguessr.com/tools\markdown-to-code\</loc>
+    <lastmod>2024-11-28</lastmod>
+  </url>
 </urlset>

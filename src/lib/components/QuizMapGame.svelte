@@ -31,7 +31,6 @@
     let gameOver = $state(false);
     let timer = $state(0);
 
-    let countryCodes;
     let IconComponent = $state();
 
     let currentWrongAttempts = 0;
@@ -107,16 +106,6 @@
             }
         } catch (error) {
             console.error("Error fetching and processing region json:", error);
-        }
-
-        try {
-            countryCodes = await fetch("/json/countryCodes.json");
-            countryCodes = await countryCodes.json();
-        } catch (error) {
-            console.error(
-                "Error fetching and processing country code json:",
-                error,
-            );
         }
     }
 
