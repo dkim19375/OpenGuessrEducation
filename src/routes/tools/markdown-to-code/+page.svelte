@@ -1,18 +1,8 @@
 <script>
-    import {
-        Hash,
-        ListOrdered,
-        Lightbulb,
-        Frame,
-        LucideGamepad,
-        HelpCircle,
-        Captions,
-        X,
-        Copy,
-    } from "lucide-svelte";
+    import {Captions, Copy, Frame, Lightbulb, ListOrdered, LucideGamepad, X,} from "lucide-svelte";
 
-    import { onMount } from "svelte";
-    import { setTitle } from '$lib/utils/pageTitle.svelte.js';
+    import {onMount} from "svelte";
+    import {setTitle} from '$lib/utils/pageTitle.svelte.js';
 
     let markdown = $state("");
 
@@ -136,7 +126,7 @@
                 break;
             case "caption":
                 insertion = `__ ${selectedText}`;
-                break;   
+                break;
             case "list":
                 insertion = `- ${selectedText}`;
                 break;
@@ -201,7 +191,7 @@
         Use this markdown editor to create guides and articles without writing
         code. Feel free to ask for help on the <b>Discord Server</b> (link down below in the footer) if you
         struggle with using this converter or don't know how to create a pull
-        request with the finished code on GitHub. You could also 
+        request with the finished code on GitHub. You could also
         <b>send your finished article code</b> to experienced people there, who
         can create the Fork with your changes and a Pull Request to the OpenGuessr
         Education Repository for you.
@@ -213,13 +203,17 @@
             You can only have <b>one</b> H1 header per article.
         </li>
         <li>
-            Country Articles should <b>not</b> have a <b>H1 header</b>, as the country name will be added as such automatically.
+            Country Articles should <b>not</b> have a <b>H1 header</b>, as the country name will be added as such
+            automatically.
         </li>
         <li>
-            For embedding Panoramas using Google Maps, please refer to <a class="text-secondary" href="/tools/acquire-embed-links">this guide</a>.
+            For embedding Panoramas using Google Maps, please refer to <a class="text-secondary"
+                                                                          href="/tools/acquire-embed-links">this
+            guide</a>.
         </li>
         <li>
-            Please <b>don't</b> create nested headers, so for example, don't put an <b>H3 after an H2 without any text</b> in <b>between</b>.
+            Please <b>don't</b> create nested headers, so for example, don't put an <b>H3 after an H2 without any
+            text</b> in <b>between</b>.
         </li>
         <li>
             Please mark important words in <b>bold</b>.
@@ -230,16 +224,16 @@
         <li>
             Please follow the formatting and structure rules explained in the <a
                 class="text-secondary"
-                target="_blank"
                 href="https://github.com/therealPaulPlay/OpenGuessrEducation/blob/main/README.md"
-                >Readme</a> file.
+                target="_blank"
+        >Readme</a> file.
         </li>
         <li>
             Check out this example guide with <b>all components</b> <a
-            class="text-secondary"
-            target="_blank"
-            href="/guides/read/example/tutorial/"
-            >here</a>.
+                class="text-secondary"
+                href="/guides/read/example/tutorial/"
+                target="_blank"
+        >here</a>.
         </li>
     </ul>
 
@@ -255,52 +249,66 @@
         <div class="flex gap-2 p-4 bg-base-300 rounded-lg flex-wrap">
             <div class="lg:tooltip" data-tip="Heading 1 (large, only one)">
                 <button
-                    onclick={() => insertMarkdown("h1")}
-                    class="btn btn-ghost btn-sm">H1</button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("h1")}>H1
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Heading 2 (medium)">
                 <button
-                    onclick={() => insertMarkdown("h2")}
-                    class="btn btn-ghost btn-sm">H2</button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("h2")}>H2
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Heading 3 (small)">
                 <button
-                    onclick={() => insertMarkdown("h3")}
-                    class="btn btn-ghost btn-sm">H3</button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("h3")}>H3
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Bold">
                 <button
-                    onclick={() => insertMarkdown("bold")}
-                    class="btn btn-ghost btn-sm font-bold">B</button>
+                        class="btn btn-ghost btn-sm font-bold"
+                        onclick={() => insertMarkdown("bold")}>B
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="List">
                 <button
-                    onclick={() => insertMarkdown("list")}
-                    class="btn btn-ghost btn-sm"
-                    ><ListOrdered size={20} /></button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("list")}
+                >
+                    <ListOrdered size={20}/>
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Caption (For Article Embed or Images)">
                 <button
-                    onclick={() => insertMarkdown("caption")}
-                    class="btn btn-ghost btn-sm"
-                    ><Captions size={20} /></button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("caption")}
+                >
+                    <Captions size={20}/>
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Article Tip">
                 <button
-                    onclick={() => insertMarkdown("tip")}
-                    class="btn btn-ghost btn-sm"
-                    ><Lightbulb size={20} /></button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("tip")}
+                >
+                    <Lightbulb size={20}/>
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Article Embed">
                 <button
-                    onclick={() => insertMarkdown("embed")}
-                    class="btn btn-ghost btn-sm"><Frame size={20} /></button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("embed")}>
+                    <Frame size={20}/>
+                </button>
             </div>
             <div class="lg:tooltip" data-tip="Guide Quiz">
                 <button
-                    onclick={() => insertMarkdown("quiz")}
-                    class="btn btn-ghost btn-sm"
-                    ><LucideGamepad size={20} /></button>
+                        class="btn btn-ghost btn-sm"
+                        onclick={() => insertMarkdown("quiz")}
+                >
+                    <LucideGamepad size={20}/>
+                </button>
             </div>
         </div>
 
@@ -308,27 +316,30 @@
             <div class="w-1/2 p-4 min-w-52 grow h-[calc(100vh-16rem)] relative">
                 <h2 class="text-lg font-bold mb-4 h-10">Markdown Editor</h2>
                 <textarea
-                    bind:value={markdown}
-                    oninput={saveMarkdownToStorage}
-                    class="w-full h-full p-4 bg-base-200 rounded-xl font-mono text-sm overflow-y-auto resize-none bg-base-300"
-                    placeholder="Start typing your pseudo-markdown text here..."></textarea>
+                        bind:value={markdown}
+                        class="w-full h-full p-4 bg-base-200 rounded-xl font-mono text-sm overflow-y-auto resize-none bg-base-300"
+                        oninput={saveMarkdownToStorage}
+                        placeholder="Start typing your pseudo-markdown text here..."></textarea>
             </div>
 
             <div class="w-1/2 p-4 min-w-52 grow h-[calc(100vh-16rem)] relative">
                 <h2 class="text-lg font-bold mb-4 flex items-center h-10">
                     Code
                     <button
-                    class="btn btn-accent btn-sm ml-auto"
-                    onclick={openPreview}>
-                    Preview
-                </button>
+                            class="btn btn-accent btn-sm ml-auto"
+                            onclick={openPreview}>
+                        Preview
+                    </button>
                     <button
-                        onclick={copyToClipboard}
-                        class="btn btn-accent btn-sm ml-2"
-                        ><Copy size={16} />Copy</button>
+                            class="btn btn-accent btn-sm ml-2"
+                            onclick={copyToClipboard}
+                    >
+                        <Copy size={16}/>
+                        Copy
+                    </button>
                 </h2>
                 <code
-                    class="block w-full h-full p-4 bg-neutral rounded-xl font-mono text-sm whitespace-pre-wrap overflow-y-auto text-white">
+                        class="block w-full h-full p-4 bg-neutral rounded-xl font-mono text-sm whitespace-pre-wrap overflow-y-auto text-white">
                     {generatedCode}
                 </code>
             </div>
@@ -338,16 +349,18 @@
     <!-- Modal for Preview -->
     {#if showPreview}
         <div
-            class="fixed inset-0 flex overflow-auto items-center justify-center bg-black bg-opacity-50">
+                class="fixed inset-0 flex overflow-auto items-center justify-center bg-black bg-opacity-50">
             <div
-                class="bg-base-100 max-h-[80dvh] overflow-auto rounded-lg p-4 w-11/12 md:w-3/4 lg:w-1/2">
+                    class="bg-base-100 max-h-[80dvh] overflow-auto rounded-lg p-4 w-11/12 md:w-3/4 lg:w-1/2">
                 <div class="flex justify-between items-center">
                     <h2 class="text-lg font-bold">Preview</h2>
                     <button onclick={closePreview} class="btn btn-ghost">
-                        <X size={20} />
+                        <X size={20}/>
                     </button>
                 </div>
-                <p class="mb-2">Please note that this is not an exact preview, just roughly how your article will look like. Components cannot be displayed properly, e.g. Guide Quizzes will not be rendered here at all.</p>
+                <p class="mb-2">Please note that this is not an exact preview, just roughly how your article will look
+                    like. Components cannot be displayed properly, e.g. Guide Quizzes will not be rendered here at
+                    all.</p>
                 <div class="mt-4 p-4 border rounded outline outline-accent border-none">
                     {@html generatedCode
                         .replaceAll("<ArticleTip>", "<mark>")

@@ -1,5 +1,5 @@
 <script>
-    import { ArrowUp } from "lucide-svelte";
+    import {ArrowUp} from "lucide-svelte";
 
     let showScrollButton = $state(false);
 
@@ -22,12 +22,13 @@
     });
 </script>
 
-<svelte:window onscroll={checkScrollable} />
+<svelte:window onscroll={checkScrollable}/>
 
 {#if showScrollButton}
     <div class="w-full flex justify-center mt-12">
         <button class="btn btn-wide btn-accent" onclick={scrollTop}>
-            <ArrowUp /> Back to top
+            <ArrowUp/>
+            Back to top
         </button>
     </div>
 {/if}

@@ -1,7 +1,7 @@
 <script>
     import * as Icon from "svelte-flag-icons";
 
-    let { region = "Europe" } = $props();
+    let {region = "Europe"} = $props();
 
     let countryCodes;
     let regionsArray;
@@ -107,33 +107,33 @@
 <div class="custom-size rounded-lg overflow-hidden grow bg-base-300 relative">
     {#if flagsLoaded}
         <div
-            class="absolute w-full h-full flex justify-center items-center dark:brightness-75 z-[5]">
+                class="absolute w-full h-full flex justify-center items-center dark:brightness-75 z-[5]">
             {#if Icon1}
-                <Icon1 class="z-50" size="110" />
+                <Icon1 class="z-50" size="110"/>
             {/if}
         </div>
         <div
-            class="absolute w-full h-full flex justify-center items-center dark:brightness-50 brightness-75 z-[4] rotate-1">
+                class="absolute w-full h-full flex justify-center items-center dark:brightness-50 brightness-75 z-[4] rotate-1">
             {#if Icon2}
                 <Icon2
-                    class="z-40 ml-1 mt-1"
-                    size="110" />
+                        class="z-40 ml-1 mt-1"
+                        size="110"/>
             {/if}
         </div>
         <div
-            class="absolute w-full h-full flex justify-center items-center dark:brightness-50 brightness-75 z-[3]">
+                class="absolute w-full h-full flex justify-center items-center dark:brightness-50 brightness-75 z-[3]">
             {#if Icon3}
                 <Icon3
-                    class="z-30 ml-2 mt-2"
-                    size="110" />
+                        class="z-30 ml-2 mt-2"
+                        size="110"/>
             {/if}
         </div>
         <div
-            class="absolute w-full h-full flex justify-center items-center dark:brightness-50 brightness-50 z-[2] rotate-2">
+                class="absolute w-full h-full flex justify-center items-center dark:brightness-50 brightness-50 z-[2] rotate-2">
             {#if Icon4}
                 <Icon4
-                    class="z-20 ml-3 mt-3"
-                    size="110" />
+                        class="z-20 ml-3 mt-3"
+                        size="110"/>
             {/if}
         </div>
     {/if}

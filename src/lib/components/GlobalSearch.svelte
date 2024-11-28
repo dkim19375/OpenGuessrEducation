@@ -1,5 +1,5 @@
 <script>
-    import { Search } from "lucide-svelte";
+    import {Search} from "lucide-svelte";
 
     let searchInput = $state("");
     let searchResults = $state([]);
@@ -115,32 +115,32 @@
     <div class="form-control">
         <label class="input flex items-center gap-2 !outline-none">
             <input
-                type="text"
-                placeholder="Search"
-                class="w-full max-w-xs"
-                bind:value={searchInput}
-                onkeypress={handleEnterPress} />
-            <Search />
+                    bind:value={searchInput}
+                    class="w-full max-w-xs"
+                    onkeypress={handleEnterPress}
+                    placeholder="Search"
+                    type="text"/>
+            <Search/>
         </label>
     </div>
 
     {#if showDropdown && searchResults.length > 0}
         <div
-            class="absolute w-full mt-2 bg-base-100 shadow-lg transition-opacity p-4 flex flex-col gap-2 rounded-lg z-20 max-h-52 overflow-auto">
+                class="absolute w-full mt-2 bg-base-100 shadow-lg transition-opacity p-4 flex flex-col gap-2 rounded-lg z-20 max-h-52 overflow-auto">
             {#each searchResults as result}
                 <div
-                    class="rounded-md w-full px-2 py-1 bg-base-200 hover:bg-base-300 transition-colors cursor-pointer"
-                    onclick={() => handleResultClick(result.url)}>
+                        class="rounded-md w-full px-2 py-1 bg-base-200 hover:bg-base-300 transition-colors cursor-pointer"
+                        onclick={() => handleResultClick(result.url)}>
                     <p class="text-sm">{result.path}</p>
                 </div>
             {/each}
         </div>
     {:else if showDropdown}
         <div
-            class="absolute w-full mt-2 bg-base-100 shadow-lg p-4 rounded-lg z-20">
+                class="absolute w-full mt-2 bg-base-100 shadow-lg p-4 rounded-lg z-20">
             <p class="text-center text-base-content/60">No matching entries.</p>
         </div>
     {/if}
 </div>
 
-<svelte:window onclick={handleClickOutside} />
+<svelte:window onclick={handleClickOutside}/>

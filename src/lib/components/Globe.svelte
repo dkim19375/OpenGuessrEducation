@@ -1,5 +1,5 @@
 <script>
-    import { onMount, onDestroy } from "svelte";
+    import {onDestroy, onMount} from "svelte";
 
     let globeElement = $state();
     let globe;
@@ -92,7 +92,7 @@
                     loadGlobe();
                 }
             },
-            { threshold: 0.1 },
+            {threshold: 0.1},
         );
 
         if (globeElement) {
@@ -106,7 +106,7 @@
             }
         });
 
-        themeObserver.observe(document.documentElement, { attributes: true });
+        themeObserver.observe(document.documentElement, {attributes: true});
 
         return () => {
             themeObserver.disconnect();
@@ -122,8 +122,8 @@
 </script>
 
 <div
-    class="globe-container w-full flex justify-center items-center rounded-xl"
-    bind:this={globeElement}>
+        bind:this={globeElement}
+        class="globe-container w-full flex justify-center items-center rounded-xl">
     {#if isLoading}
         <div class="loading loading-spinner loading-lg text-base-200"></div>
     {/if}
@@ -133,6 +133,7 @@
     .globe-container {
         height: 350px;
     }
+
     :global(.scene-container) {
         background-color: transparent !important;
     }

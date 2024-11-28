@@ -1,14 +1,14 @@
 <script>
-    import { onMount } from "svelte";
-    import { page } from "$app/stores";
-    import { AlertCircle } from "lucide-svelte";
+    import {onMount} from "svelte";
+    import {page} from "$app/stores";
+    import {AlertCircle} from "lucide-svelte";
 
     let showBanner = $state(false);
     let cookieConsent = false;
 
     // Instead of a banner, if one CMP already exists (e.g. for Ads), use TFC instead to listen to the consent from there
     // window["gtag_enable_tcf_support"] = true;
-    
+
     onMount(() => {
         // Check if the user has already accepted cookies
         const consent = localStorage.getItem("cookieConsent");
@@ -24,9 +24,11 @@
     function loadGoogleAnalytics(hasConsent) {
         try {
             window.dataLayer = window.dataLayer || [];
+
             function gtag() {
                 dataLayer.push(arguments);
             }
+
             gtag("js", new Date());
             gtag("config", "G-DXD64B7ZDX", {
                 page_title: document.title,
@@ -70,23 +72,25 @@
 
 <svelte:head>
     <script
-        src="https://www.googletagmanager.com/gtag/js?id=G-DXD64B7ZDX"
-        async></script>
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-DXD64B7ZDX"></script>
 </svelte:head>
 
 {#if showBanner}
     <div role="alert" class="alert fixed w-fit m-4 bottom-0 bg-base-100 right-0 z-50 shadow-lg">
-        <AlertCircle className="stroke-info h-6 w-6 shrink-0" />
+        <AlertCircle className="stroke-info h-6 w-6 shrink-0"/>
         <span
-            >This website uses cookies according to its <a
+        >This website uses cookies according to its <a
                 href="https://openguessr.com/legal"
                 class="text-secondary">privacy policy</a
-            >.</span>
+        >.</span>
         <div class="flex flex-wrap gap-2">
             <button onclick={handleDeny} class="btn btn-sm btn-accent"
-                >Only essential</button>
+            >Only essential
+            </button>
             <button onclick={handleAccept} class="btn btn-sm btn-secondary"
-                >Accept</button>
+            >Accept
+            </button>
         </div>
     </div>
 {/if}

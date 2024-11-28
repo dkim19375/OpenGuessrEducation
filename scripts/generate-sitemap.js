@@ -1,7 +1,7 @@
 // scripts/generate-sitemap.js
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,7 +13,7 @@ const BASE_URL = 'https://education.openguessr.com'; // Updated to your actual d
 
 function getRoutes(dir, baseRoute = '') {
     let routes = [];
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    const entries = fs.readdirSync(dir, {withFileTypes: true});
 
     for (const entry of entries) {
         const routePath = path.join(baseRoute, entry.name);

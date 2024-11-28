@@ -1,22 +1,16 @@
 <script>
-    import { onMount } from "svelte";
-    import {
-        geoPath,
-        geoMercator,
-        geoOrthographic,
-        geoGraticule10,
-    } from "d3-geo";
-    import { feature } from "topojson-client";
-    import { createEventDispatcher } from "svelte";
-    import { Plus, Minus } from "lucide-svelte";
-    import { tweened } from "svelte/motion";
-    import { cubicOut, linear, backInOut } from "svelte/easing";
+    import {createEventDispatcher, onMount} from "svelte";
+    import {geoGraticule10, geoMercator, geoOrthographic, geoPath,} from "d3-geo";
+    import {feature} from "topojson-client";
+    import {Minus, Plus} from "lucide-svelte";
+    import {tweened} from "svelte/motion";
+    import {backInOut, cubicOut, linear} from "svelte/easing";
 
     let {
         region = "World",
         zoom = $bindable(1),
         width = 800,
-        height = 400,
+        height = 800,
         interactive = false,
         highlightedFeature = null,
         showLabels = false,
@@ -54,11 +48,11 @@
 
     let flashingFeature = $state(null);
     let flashCircle = $state(null);
-    let flashCircleOpacity = tweened(0, { duration: 400, easing: linear });
-    let flashCircleRadius = tweened(0, { duration: 600, easing: backInOut });
+    let flashCircleOpacity = tweened(0, {duration: 400, easing: linear});
+    let flashCircleRadius = tweened(0, {duration: 600, easing: backInOut});
 
     let outlineFeature = $state(null);
-    let outlineWidth = tweened(0, { duration: 500, easing: cubicOut });
+    let outlineWidth = tweened(0, {duration: 500, easing: cubicOut});
 
     let loaded = $state(false);
 
@@ -82,14 +76,14 @@
     export function highlightFeature(featureName, color) {
         features = features.map((feature) => {
             if (feature.properties.name === featureName) {
-                return { ...feature, color, flashColor: "" };
+                return {...feature, color, flashColor: ""};
             }
             return feature;
         });
 
         points = points.map((point) => {
             if (point.properties.name === featureName) {
-                return { ...point, color, flashColor: "" };
+                return {...point, color, flashColor: ""};
             }
             return point;
         });
@@ -121,7 +115,7 @@
         points = points.map((point) => {
             if (point.properties.name === featureName) {
                 pointExists = true;
-                return { ...point, showLabel };
+                return {...point, showLabel};
             }
             return point;
         });
@@ -129,7 +123,7 @@
         if (!pointExists) {
             features = features.map((feature) => {
                 if (feature.properties.name === featureName) {
-                    return { ...feature, showLabel };
+                    return {...feature, showLabel};
                 }
                 return feature;
             });
@@ -140,13 +134,13 @@
 
             features = features.map((feature) => {
                 if (feature.properties.name === featureName) {
-                    return { ...feature, showLabel };
+                    return {...feature, showLabel};
                 }
                 return feature;
             });
             points = points.map((point) => {
                 if (point.properties.name === featureName) {
-                    return { ...point, showLabel };
+                    return {...point, showLabel};
                 }
                 return point;
             });
@@ -158,14 +152,14 @@
 
         features = features.map((feature) => {
             if (feature.properties.name === featureName) {
-                return { ...feature, isInteractive };
+                return {...feature, isInteractive};
             }
             return feature;
         });
 
         points = points.map((point) => {
             if (point.properties.name === featureName) {
-                return { ...point, isInteractive };
+                return {...point, isInteractive};
             }
             return point;
         });
@@ -253,7 +247,7 @@
 
     function handleRegionClick(feature, event) {
         if (feature.isHighlighted && feature.isInteractive) {
-            dispatch("click", { properties: feature.properties });
+            dispatch("click", {properties: feature.properties});
         }
 
         rect = mapContainer.getBoundingClientRect();
@@ -268,7 +262,7 @@
 
         console.log(
             "Coordinates: ",
-            { latitude, longitude },
+            {latitude, longitude},
             "Region name: ",
             feature.properties.name,
         );
@@ -322,7 +316,7 @@
         if (!allRegionSettings) return;
 
         const settings = allRegionSettings[region] || allRegionSettings.Default;
-        const { center, zoom: regionZoom } = settings;
+        const {center, zoom: regionZoom} = settings;
 
         // Calculate the scale based on the map container size and region zoom
         const minDimension = Math.min(width, height);
@@ -396,7 +390,7 @@
     }
 
     function returnAllCountries() {
-    if (!regionCountries) return;
+        if (!regionCountries) return;
         return [...new Set((regionCountries?.World || [])
             .concat(
                 regionCountries?.Europe || [],
@@ -468,7 +462,7 @@
         if (!interactive || !isDragging) return;
         // Store the initial rect for reference
         rect = mapContainer.getBoundingClientRect();
-        translateX +=  (event.clientX - lastX) * (width / rect.width);
+        translateX += (event.clientX - lastX) * (width / rect.width);
         translateY += (event.clientY - lastY) * (height / rect.height);
         lastX = event.clientX;
         lastY = event.clientY;
@@ -513,58 +507,58 @@
     }
 
     function handleTouchMove(event) {
-    if (!interactive) return;
-    
-    if (isTouching && event.touches.length === 1) {
-        event.preventDefault(); // Prevent page scroll
-        rect = mapContainer.getBoundingClientRect();
+        if (!interactive) return;
 
-        const touch = event.touches[0];
-        const deltaX = touch.clientX - lastX;
-        const deltaY = touch.clientY - lastY;
+        if (isTouching && event.touches.length === 1) {
+            event.preventDefault(); // Prevent page scroll
+            rect = mapContainer.getBoundingClientRect();
 
-        translateX += deltaX * (width / rect.width);
-        translateY += deltaY * (height / rect.height);
-        
-        lastX = touch.clientX;
-        lastY = touch.clientY;
-        
-        updateProjection();
-        generatePaths();
-        
-    } else if (event.touches.length === 2) {
-    const currentDistance = getTouchDistance(event.touches);
+            const touch = event.touches[0];
+            const deltaX = touch.clientX - lastX;
+            const deltaY = touch.clientY - lastY;
 
-    if (lastTouchDistance) {
-        const distanceChange = currentDistance - lastTouchDistance;
-        const zoomFactor = 1 + (distanceChange / lastTouchDistance);
+            translateX += deltaX * (width / rect.width);
+            translateY += deltaY * (height / rect.height);
 
-        // Calculate the pinch midpoint as the zoom focus point [of the two touches]
-        const pinchMidX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
-        const pinchMidY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+            lastX = touch.clientX;
+            lastY = touch.clientY;
 
-        // Get bounding rect for accurate translation calculation
-        rect = mapContainer.getBoundingClientRect();
-        const pinchMidXInMap = (pinchMidX - rect.left) * (width / rect.width);
-        const pinchMidYInMap = (pinchMidY - rect.top) * (height / rect.height);
+            updateProjection();
+            generatePaths();
 
-        // Apply zoom limit
-        const newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, zoom * zoomFactor));
-        const scaleChange = newZoom / zoom; // Calculate scale factor change
+        } else if (event.touches.length === 2) {
+            const currentDistance = getTouchDistance(event.touches);
 
-        // Adjust translation to keep zoom centered on the pinch point
-        translateX -= (pinchMidXInMap - translateX) * (scaleChange - 1);
-        translateY -= (pinchMidYInMap - translateY) * (scaleChange - 1);
+            if (lastTouchDistance) {
+                const distanceChange = currentDistance - lastTouchDistance;
+                const zoomFactor = 1 + (distanceChange / lastTouchDistance);
 
-        zoom = newZoom; // Update the zoom level
-        updateProjection();
-        generatePaths();
+                // Calculate the pinch midpoint as the zoom focus point [of the two touches]
+                const pinchMidX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
+                const pinchMidY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
+
+                // Get bounding rect for accurate translation calculation
+                rect = mapContainer.getBoundingClientRect();
+                const pinchMidXInMap = (pinchMidX - rect.left) * (width / rect.width);
+                const pinchMidYInMap = (pinchMidY - rect.top) * (height / rect.height);
+
+                // Apply zoom limit
+                const newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, zoom * zoomFactor));
+                const scaleChange = newZoom / zoom; // Calculate scale factor change
+
+                // Adjust translation to keep zoom centered on the pinch point
+                translateX -= (pinchMidXInMap - translateX) * (scaleChange - 1);
+                translateY -= (pinchMidYInMap - translateY) * (scaleChange - 1);
+
+                zoom = newZoom; // Update the zoom level
+                updateProjection();
+                generatePaths();
+            }
+
+            lastTouchDistance = currentDistance;
+        }
+
     }
-
-    lastTouchDistance = currentDistance;
-}
-
-}
 
     function handleTouchEnd(event) {
         isTouching = false;
@@ -620,7 +614,7 @@
 
                     return {
                         type: "Point",
-                        properties: { name },
+                        properties: {name},
                         uniqueKey: `point-${index}-${name}`,
                         x,
                         y,
@@ -649,13 +643,13 @@
 </script>
 
 <div
-    class="map-container rounded-lg relative grow {dynamicHeight
+        bind:this={mapContainer}
+        class="map-container rounded-lg relative grow {dynamicHeight
         ? 'dynamic-viewport-height'
         : ''} {smallDynamicHeight
         ? 'small-dynamic-viewport-height'
         : ''}"
-    bind:this={mapContainer}
-    id="mapContainer">
+        id="mapContainer">
     {#if !loaded}
         <div class="skeleton custom-loading-size opacity-75 rounded-lg">
         </div>
@@ -667,47 +661,47 @@
 
         <!-- svelte-ignore a11y_no_static_element_interactions -->
         <svg
-            width="100%"
-            height="100%"
-            viewBox={`0 0 ${width} ${height}`}
-            style="filter: hue-rotate({hueRotateDegree}deg)"
-            onwheel={handleZoom}
-            onmousedown={handleMouseDown}
-            onmousemove={handleMouseMove}
-            onmouseup={handleMouseUp}
-            onmouseleave={handleMouseUp}
-            fill="oklch(var(--a))"
-            class="relative {interactive
+                width="100%"
+                height="100%"
+                viewBox={`0 0 ${width} ${height}`}
+                style="filter: hue-rotate({hueRotateDegree}deg)"
+                onwheel={handleZoom}
+                onmousedown={handleMouseDown}
+                onmousemove={handleMouseMove}
+                onmouseup={handleMouseUp}
+                onmouseleave={handleMouseUp}
+                fill="oklch(var(--a))"
+                class="relative {interactive
                 ? 'pointer-events-auto'
                 : 'pointer-events-none'}">
             <g>
                 {#if projectionType === "geoOrthographic" && backgroundCircle}
                     <path
-                        d={path({ type: "Sphere" })}
-                        fill="rgba(0, 0, 0, 0.075)"
-                        stroke="none"
-                        class="planet-background" />
+                            d={path({ type: "Sphere" })}
+                            fill="rgba(0, 0, 0, 0.075)"
+                            stroke="none"
+                            class="planet-background"/>
                 {/if}
                 <g>
                     {#each features as feature (feature.uniqueKey)}
                         <!-- svelte-ignore a11y_click_events_have_key_events -->
                         <!-- svelte-ignore a11y_no_static_element_interactions -->
                         <path
-                            d={feature.d}
-                            fill={feature.flashColor ||
+                                d={feature.d}
+                                fill={feature.flashColor ||
                                 feature.color ||
                                 "oklch(var(--s))"}
-                            stroke="oklch(var(--a))"
-                            stroke-width="0.5"
-                            vector-effect="non-scaling-stroke"
-                            onclick={(event) =>
+                                stroke="oklch(var(--a))"
+                                stroke-width="0.5"
+                                vector-effect="non-scaling-stroke"
+                                onclick={(event) =>
                                 handleRegionClick(feature, event)}
-                            onmouseenter={() => (feature.isHovered = true)}
-                            onmouseleave={() => (feature.isHovered = false)}
-                            class="feature-path"
-                            style="filter: {feature.isHovered
+                                onmouseenter={() => (feature.isHovered = true)}
+                                onmouseleave={() => (feature.isHovered = false)}
+                                class="feature-path"
+                                style="filter: {feature.isHovered
                                 ? 'brightness(1.1)'
-                                : 'none'};" />
+                                : 'none'};"/>
                     {/each}
                 </g>
 
@@ -718,136 +712,143 @@
                             <!-- svelte-ignore a11y_click_events_have_key_events -->
                             <!-- svelte-ignore a11y_no_static_element_interactions -->
                             <g
-                                onclick={(event) =>
+                                    onclick={(event) =>
                                     handleRegionClick(point, event)}
-                                onmouseenter={() => (point.isHovered = true)}
-                                onmouseleave={() => (point.isHovered = false)}
-                                class="point-feature"
-                                stroke="oklch(var(--b2))"
-                                stroke-width="2"
-                                transform={`translate(${point.x},${point.y})`}>
+                                    onmouseenter={() => (point.isHovered = true)}
+                                    onmouseleave={() => (point.isHovered = false)}
+                                    class="point-feature"
+                                    stroke={(
+                                    point.properties.name.endsWith("Ocean") ||
+                                    point.properties.name.endsWith("River") ||
+                                    point.properties.name.endsWith("Ocean") ||
+                                    point.properties.name.endsWith("Sea") ||
+                                    point.properties.name.startsWith("Strait") ||
+                                    point.properties.name.startsWith("Lake") ||
+                                    point.properties.name.startsWith("Gulf")) ? "var(--water)" : "oklch(var(--b2))"}
+                                    stroke-width="2"
+                                    transform={`translate(${point.x},${point.y})`}>
                                 <circle
-                                    r={5 + (15 * Math.max(width, height)) / 2000}
-                                    fill={point.flashColor ||
+                                        r={5 + (15 * Math.max(width, height)) / 2000}
+                                        fill={point.flashColor ||
                                         point.color ||
                                         "oklch(var(--s))"}
-                                    class="point-circle"
-                                    style="filter: drop-shadow(2px 2px 4px rgba(50,50,50,0.3)) {point.isHovered
+                                        class="point-circle"
+                                        style="filter: drop-shadow(2px 2px 4px rgba(50,50,50,0.3)) {point.isHovered
                                         ? 'brightness(1.2)'
-                                        : ''};" />
+                                        : ''};"/>
                             </g>
                         {/each}
                     {/if}
                 </g>
 
                 {#if interactive}
-                <!-- text labels (country / region / city name) -->
-                <g>
-                    {#each features as feature (feature.uniqueKey)}
-                        <!-- check if the feature is even highlighted and part of the map, if all labels or its label should be shown, if the zoom is big enough and if there isn't a point with that label already -->
-                        {#if feature.isHighlighted && (showLabels || feature.showLabel) && zoom >= minLabelZoom && !points.some((point) => point.properties.name == feature.properties.name)}
-                            {#if path.centroid(feature)}
-                                {@const [x, y] = path.centroid(feature)}
+                    <!-- text labels (country / region / city name) -->
+                    <g>
+                        {#each features as feature (feature.uniqueKey)}
+                            <!-- check if the feature is even highlighted and part of the map, if all labels or its label should be shown, if the zoom is big enough and if there isn't a point with that label already -->
+                            {#if feature.isHighlighted && (showLabels || feature.showLabel) && zoom >= minLabelZoom && !points.some((point) => point.properties.name == feature.properties.name)}
+                                {#if path.centroid(feature)}
+                                    {@const [x, y] = path.centroid(feature)}
+                                    {@const text = shortenRegionName(
+                                        feature.properties.name,
+                                    )}
+                                    {@const textLength = text.length * 8}
+                                    <g>
+                                        <rect
+                                                x={x - textLength / 2 - 10}
+                                                y={y - 12}
+                                                width={textLength + 20}
+                                                height="24"
+                                                rx="10"
+                                                ry="10"
+                                                opacity="0.85"
+                                                pointer-events="none"
+                                                fill="oklch(var(--b2))"
+                                                class="label-background"/>
+                                        <text
+                                                {x}
+                                                y={y + 1}
+                                                text-anchor="middle"
+                                                dominant-baseline="middle"
+                                                fill="oklch(var(--s))"
+                                                font-size="15"
+                                                font-weight="bold"
+                                                pointer-events="none"
+                                                class="label-text">
+                                            {text}
+                                        </text>
+                                    </g>
+                                {/if}
+                            {/if}
+                        {/each}
+
+                        {#each points as point (point.uniqueKey)}
+                            {#if point.isHighlighted && (showLabels || point.showLabel) && zoom >= minLabelZoom}
                                 {@const text = shortenRegionName(
-                                    feature.properties.name,
+                                    point.properties.name,
                                 )}
                                 {@const textLength = text.length * 8}
-                                <g>
+                                <g transform={`translate(${point.x},${point.y})`}>
                                     <rect
-                                        x={x - textLength / 2 - 10}
-                                        y={y - 12}
-                                        width={textLength + 20}
-                                        height="24"
-                                        rx="10"
-                                        ry="10"
-                                        opacity="0.85"
-                                        pointer-events="none"
-                                        fill="oklch(var(--b2))"
-                                        class="label-background" />
+                                            x={-textLength / 2 - 10}
+                                            y={-43}
+                                            width={textLength + 20}
+                                            height="24"
+                                            rx="10"
+                                            ry="10"
+                                            opacity="0.85"
+                                            pointer-events="none"
+                                            fill="oklch(var(--b2))"
+                                            class="label-background"/>
                                     <text
-                                        {x}
-                                        y={y + 1}
-                                        text-anchor="middle"
-                                        dominant-baseline="middle"
-                                        fill="oklch(var(--s))"
-                                        font-size="15"
-                                        font-weight="bold"
-                                        pointer-events="none"
-                                        class="label-text">
+                                            y={-30}
+                                            text-anchor="middle"
+                                            dominant-baseline="middle"
+                                            fill="oklch(var(--s))"
+                                            font-size="15"
+                                            font-weight="bold"
+                                            pointer-events="none"
+                                            class="label-text">
                                         {text}
                                     </text>
                                 </g>
                             {/if}
-                        {/if}
-                    {/each}
-
-                    {#each points as point (point.uniqueKey)}
-                        {#if point.isHighlighted && (showLabels || point.showLabel) && zoom >= minLabelZoom}
-                            {@const text = shortenRegionName(
-                                point.properties.name,
-                            )}
-                            {@const textLength = text.length * 8}
-                            <g transform={`translate(${point.x},${point.y})`}>
-                                <rect
-                                    x={-textLength / 2 - 10}
-                                    y={-43}
-                                    width={textLength + 20}
-                                    height="24"
-                                    rx="10"
-                                    ry="10"
-                                    opacity="0.85"
-                                    pointer-events="none"
-                                    fill="oklch(var(--b2))"
-                                    class="label-background" />
-                                <text
-                                    y={-30}
-                                    text-anchor="middle"
-                                    dominant-baseline="middle"
-                                    fill="oklch(var(--s))"
-                                    font-size="15"
-                                    font-weight="bold"
-                                    pointer-events="none"
-                                    class="label-text">
-                                    {text}
-                                </text>
-                            </g>
-                        {/if}
-                    {/each}
-                </g>
-
-                {#if flashCircle}
-                    {@const [cx, cy] =
-                        flashingFeature.type === "Point"
-                            ? projection([
-                                  flashingFeature.initX,
-                                  flashingFeature.initY,
-                              ])
-                            : path.centroid(flashingFeature)}
-                    <g style="pointer-events: none">
-                        <circle
-                            {cx}
-                            {cy}
-                            r={$flashCircleRadius}
-                            fill="none"
-                            stroke="white"
-                            stroke-width="4"
-                            opacity={$flashCircleOpacity}
-                            class="flash-circle">
-                        </circle>
+                        {/each}
                     </g>
-                {/if}
 
-                {#if outlineFeature}
-                    <g>
-                        <path
-                            d={path(outlineFeature)}
-                            fill="none"
-                            stroke="white"
-                            stroke-width={$outlineWidth}
-                            class="pointer-events-none"
-                            vector-effect="non-scaling-stroke" />
-                    </g>
-                {/if}
+                    {#if flashCircle}
+                        {@const [cx, cy] =
+                            flashingFeature.type === "Point"
+                                ? projection([
+                                    flashingFeature.initX,
+                                    flashingFeature.initY,
+                                ])
+                                : path.centroid(flashingFeature)}
+                        <g style="pointer-events: none">
+                            <circle
+                                    {cx}
+                                    {cy}
+                                    r={$flashCircleRadius}
+                                    fill="none"
+                                    stroke="white"
+                                    stroke-width="4"
+                                    opacity={$flashCircleOpacity}
+                                    class="flash-circle">
+                            </circle>
+                        </g>
+                    {/if}
+
+                    {#if outlineFeature}
+                        <g>
+                            <path
+                                    d={path(outlineFeature)}
+                                    fill="none"
+                                    stroke="white"
+                                    stroke-width={$outlineWidth}
+                                    class="pointer-events-none"
+                                    vector-effect="non-scaling-stroke"/>
+                        </g>
+                    {/if}
                 {/if}
             </g>
         </svg>
@@ -855,16 +856,16 @@
         {#if interactive}
             <div class="absolute bottom-4 right-4 flex flex-col gap-2">
                 <button
-                    class="btn btn-circle btn-base-200 btn-sm"
-                    onclick={handleZoomIn}
-                    aria-label="Zoom in">
-                    <Plus size={16} />
+                        class="btn btn-circle btn-base-200 btn-sm"
+                        onclick={handleZoomIn}
+                        aria-label="Zoom in">
+                    <Plus size={16}/>
                 </button>
                 <button
-                    class="btn btn-circle btn-base-200 btn-sm"
-                    onclick={handleZoomOut}
-                    aria-label="Zoom out">
-                    <Minus size={16} />
+                        class="btn btn-circle btn-base-200 btn-sm"
+                        onclick={handleZoomOut}
+                        aria-label="Zoom out">
+                    <Minus size={16}/>
                 </button>
             </div>
         {/if}
@@ -898,9 +899,8 @@
     }
 
     .feature-path {
-        transition:
-            fill 0.1s ease,
-            filter 0.1s ease;
+        transition: fill 0.1s ease,
+        filter 0.1s ease;
     }
 
     .label-background,
@@ -913,9 +913,8 @@
     }
 
     .point-circle {
-        transition:
-            fill 0.1s ease,
-            filter 0.1s ease;
+        transition: fill 0.1s ease,
+        filter 0.1s ease;
     }
 
     .dynamic-viewport-height {

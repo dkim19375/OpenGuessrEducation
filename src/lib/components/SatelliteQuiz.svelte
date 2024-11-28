@@ -1,16 +1,16 @@
 <script>
-    import { onMount } from "svelte";
+    import {onMount} from "svelte";
     import BaseOptionsQuiz from "$lib/components/BaseOptionsQuiz.svelte";
     import "ol/ol.css";
-    import { Map, View } from "ol";
+    import {Map, View} from "ol";
     import TileLayer from "ol/layer/Tile";
     import XYZ from "ol/source/XYZ";
-    import { fromLonLat, toLonLat } from "ol/proj";
+    import {fromLonLat, toLonLat} from "ol/proj";
 
-    let { jsonName = "capital-cities", regionType = "city" } = $props();
+    let {jsonName = "capital-cities", regionType = "city"} = $props();
 
     let [a1, a2, a3, a4] = $state("");
-    
+
     // svelte-ignore state_referenced_locally
     let answers = [a1, a2, a3, a4];
     let correctAnswer = $state(1);
@@ -171,7 +171,7 @@
         };
 
         view.on("change:center", centerConstraint);
-        view.setProperties({ centerConstraint: centerConstraint });
+        view.setProperties({centerConstraint: centerConstraint});
     }
 
     onMount(() => {
@@ -181,17 +181,17 @@
 </script>
 
 <BaseOptionsQuiz
-    answerOne={a1}
-    answerTwo={a2}
-    answerThree={a3}
-    answerFour={a4}
-    {questionAmount}
-    {question}
-    {correctAnswer}
-    {handleNextQuestion}
-    handleStartGame={startSatelliteGame}>
+        answerFour={a4}
+        answerOne={a1}
+        answerThree={a3}
+        answerTwo={a2}
+        {correctAnswer}
+        {handleNextQuestion}
+        handleStartGame={startSatelliteGame}
+        {question}
+        {questionAmount}>
     <div class="w-full h-full mb-4 rounded-lg overflow-hidden">
-        <div id="map" class="custom-size"></div>
+        <div class="custom-size" id="map"></div>
     </div>
 </BaseOptionsQuiz>
 

@@ -1,6 +1,6 @@
 <script>
-    import { onMount } from "svelte";
-    import { Sun } from "lucide-svelte";
+    import {onMount} from "svelte";
+    import {Sun} from "lucide-svelte";
     import ArticleBox from "./ArticleBox.svelte";
 
     let sunPosition = $state("north");
@@ -20,17 +20,17 @@
 <ArticleBox>
     <div class="relative w-24 h-48">
         <img
-            id="compass"
-            src="/assets/guides/compass_example.png"
-            alt="Compass"
-            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 dark:invert" />
+                alt="Compass"
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 dark:invert"
+                id="compass"
+                src="/assets/guides/compass_example.png"/>
 
         <Sun
-            alt="Sun"
-            class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10"
-            style=" top: {sunPosition === 'north'
+                alt="Sun"
+                class="absolute left-1/2 transform -translate-x-1/2 w-10 h-10"
+                style=" top: {sunPosition === 'north'
                 ? '0'
-                : 'auto'}; bottom: {sunPosition === 'south' ? '0' : 'auto'};" />
+                : 'auto'}; bottom: {sunPosition === 'south' ? '0' : 'auto'};"/>
     </div>
     <p class="mt-4">
         Hemisphere: <span class="font-bold">{hemisphere}</span>

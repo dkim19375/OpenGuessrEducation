@@ -1,8 +1,8 @@
 <script>
-    import { Check, ArrowRight } from "lucide-svelte";
+    import {ArrowRight, Check} from "lucide-svelte";
     import QuizResult from "./QuizResult.svelte";
-    import { onMount } from "svelte";
-    import { playSound } from "$lib/utils/playSound";
+    import {onMount} from "svelte";
+    import {playSound} from "$lib/utils/playSound";
 
     let {
         question = "Default Question",
@@ -13,8 +13,10 @@
         correctAnswer = 1,
         isCompleted = $bindable(false),
         questionAmount = 15,
-        handleNextQuestion = () => {},
-        handleStartGame = () => {},
+        handleNextQuestion = () => {
+        },
+        handleStartGame = () => {
+        },
         children // For components that work like layouts (with a slot (now children?.()), in which HTML can be passed) - children needs to be specified as a prop
     } = $props();
 
@@ -103,23 +105,24 @@
         <div class="flex w-full items-center mb-4 flex-wrap gap-3">
             <h2 class="text-xl font-bold ml-1">{question}</h2>
             <span class="rounded-md bg-base-300 px-2 mt-0.5"
-                >{currentQuestionIndex}/{questionAmount}</span>
+            >{currentQuestionIndex}/{questionAmount}</span>
             <div class="flex justify-end ml-auto items-center gap-4">
                 <div class="lg:tooltip" data-tip="Automatically go to the next question">
                     <label class="label cursor-pointer">
                         <span class="label-text mr-2">Auto</span>
                         <input
-                            type="checkbox"
-                            bind:checked={autoNext}
-                            onchange={enableAutoNextQuestion}
-                            class="checkbox checkbox-sm checkbox-accent" />
+                                bind:checked={autoNext}
+                                class="checkbox checkbox-sm checkbox-accent"
+                                onchange={enableAutoNextQuestion}
+                                type="checkbox"/>
                     </label>
                 </div>
                 <button
-                    class="btn btn-accent btn-sm {autoNext
+                        class="btn btn-accent btn-sm {autoNext
                         ? 'opacity-50 pointer-events-none'
                         : ""} {isCompleted ? "" : "opacity-50"}" onclick={manuallyGoToNextQuestion}>
-                    Next <ArrowRight />
+                    Next
+                <ArrowRight/>
                 </button>
             </div>
         </div>
@@ -129,7 +132,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             {#each answers as answer, index}
                 <button
-                    class="btn w-full h-auto py-2 px-12 relative text-wrap
+                        class="btn w-full h-auto py-2 px-12 relative text-wrap
                      {index === correctAnswer - 1 &&
                     selectedAnswer === correctAnswer - 1
                         ? 'btn-success opacity-100'
@@ -140,15 +143,15 @@
                      {isCompleted && index != correctAnswer - 1
                         ? 'opacity-50 pointer-events-none'
                         : ''}"
-                    onclick={() => handleAnswer(index)}>
+                        onclick={() => handleAnswer(index)}>
                     {answer}
                     {#if index === correctAnswer - 1 && selectedAnswer != -1}
                         <span class="absolute right-2">
-                            <Check size={20} />
+                            <Check size={20}/>
                         </span>
                     {/if}
                     <span
-                        class="absolute left-2 rounded-full items-center flex justify-center bg-base-200 text-center align-middle w-7 h-7">
+                            class="absolute left-2 rounded-full items-center flex justify-center bg-base-200 text-center align-middle w-7 h-7">
                         <p class="opacity-50 text-base-300 invert">
                             {getIndexLetter(index)}
                         </p>
@@ -161,7 +164,7 @@
 
 {#if gameOver}
     <!-- errors x4 because we want errors to count as 1 here, not 0.25 like it is for maps -->
-    <QuizResult score={questionAmount} {errors} errorWeight="1" {startGame} />
+    <QuizResult score={questionAmount} {errors} errorWeight="1" {startGame}/>
 {/if}
 
 <style>

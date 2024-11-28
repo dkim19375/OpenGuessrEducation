@@ -1,7 +1,7 @@
 export async function addExperience(addAmount) {
 
     const currentExperience = Number(localStorage.getItem("experience"));
-    
+
     if (!currentExperience) {
         console.error("Couldn't retrieve experience");
         return

@@ -1,8 +1,8 @@
 <script>
-    import { onMount } from "svelte";
+    import {onMount} from "svelte";
     import BaseOptionsQuiz from "$lib/components/BaseOptionsQuiz.svelte";
 
-    let { region, assetFolder = "bollards", filePrefix = "bollard" } = $props();
+    let {region, assetFolder = "bollards", filePrefix = "bollard"} = $props();
 
     let [a1, a2, a3, a4] = $state("");
     // svelte-ignore state_referenced_locally
@@ -81,7 +81,7 @@
                 const randomCountryIndex = Math.floor(
                     Math.random() * wrongAnswersPool.length,
                 );
-                
+
                 const randomCountry = wrongAnswersPool[randomCountryIndex];
                 // Splice --> removes entry from actual array, Slice --> removes entry only from new copy of array
                 wrongAnswersPool.splice(randomCountryIndex, 1); // Remove that one to avoid duplicates in the 3 wrong options
@@ -103,24 +103,24 @@
 </script>
 
 <BaseOptionsQuiz
-    answerOne={a1}
-    answerTwo={a2}
-    answerThree={a3}
-    answerFour={a4}
-    {questionAmount}
-    {question}
-    {correctAnswer}
-    {handleNextQuestion}
-    handleStartGame={startClueGame}>
+        answerFour={a4}
+        answerOne={a1}
+        answerThree={a3}
+        answerTwo={a2}
+        {correctAnswer}
+        {handleNextQuestion}
+        handleStartGame={startClueGame}
+        {question}
+        {questionAmount}>
     <div class="w-full flex justify-center items-center mb-4">
         {#if randomQuestion}
             <img
-                alt="bollard"
-                class="custom-height rounded-md"
-                src="/assets/clues/{assetFolder}/{filePrefix}-{randomQuestion.replace(
+                    alt="bollard"
+                    class="custom-height rounded-md"
+                    src="/assets/clues/{assetFolder}/{filePrefix}-{randomQuestion.replace(
                     ' ',
                     '-',
-                ).toLowerCase()}.jpg" />
+                ).toLowerCase()}.jpg"/>
         {/if}
     </div>
 </BaseOptionsQuiz>

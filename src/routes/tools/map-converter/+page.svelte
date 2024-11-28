@@ -1,8 +1,8 @@
 <script>
-    import { Download, ArrowDown } from "lucide-svelte";
+    import {ArrowDown, Download} from "lucide-svelte";
 
-    import { onMount } from "svelte";
-    import { setTitle } from "$lib/utils/pageTitle.svelte.js";
+    import {onMount} from "svelte";
+    import {setTitle} from "$lib/utils/pageTitle.svelte.js";
 
     onMount(() => {
         setTitle("Map Converter");
@@ -43,7 +43,7 @@
                 return [coordinate.lat, coordinate.lng];
             });
 
-            var convertedJson = JSON.stringify({ locations: newJson }, null, 2);
+            var convertedJson = JSON.stringify({locations: newJson}, null, 2);
 
             document.getElementById("outputJson").value = convertedJson;
         } catch (error) {
@@ -55,7 +55,7 @@
     function downloadConvertedJSON() {
         var convertedJson = document.getElementById("outputJson").value;
 
-        var blob = new Blob([convertedJson], { type: "application/json" });
+        var blob = new Blob([convertedJson], {type: "application/json"});
 
         var a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
@@ -70,8 +70,8 @@
     <p class="mb-4 max-w-2xl">
         This tool allows to convert maps from sources like <a
             class="text-secondary"
-            target="_blank"
-            href="https://map-generator.vercel.app/">Map-Generator</a> to the OpenGuessr
+            href="https://map-generator.vercel.app/"
+            target="_blank">Map-Generator</a> to the OpenGuessr
         format.
     </p>
 
@@ -84,33 +84,37 @@
     <div class="flex items-center flex-col justify-start w-fit mt-8">
         <div class="bg-base-200 rounded-xl p-4 flex justify-center gap-4 flex-wrap">
             <input
-                type="file"
-                id="fileInput"
-                class="file-input file-input-bordered w-full max-w-xs"
-                accept=".json"
-                onchange={handleFileSelect} />
+                    accept=".json"
+                    class="file-input file-input-bordered w-full max-w-xs"
+                    id="fileInput"
+                    onchange={handleFileSelect}
+                    type="file"/>
 
             <div class="divider">OR</div>
 
             <textarea
-                id="inputJson"
-                rows="1"
-                cols="5"
-                class="textarea textarea-bordered custom-screen-width"
-                placeholder="...paste your JSON directly here"></textarea>
+                    class="textarea textarea-bordered custom-screen-width"
+                    cols="5"
+                    id="inputJson"
+                    placeholder="...paste your JSON directly here"
+                    rows="1"></textarea>
         </div>
 
-        <button class="btn btn-secondary my-4" onclick={convertJSON}>Convert <ArrowDown /></button>
+        <button class="btn btn-secondary my-4" onclick={convertJSON}>Convert
+            <ArrowDown/>
+        </button>
 
         <div class="bg-base-200 rounded-xl p-4 flex justify-center gap-4 flex-wrap">
             <textarea
-                id="outputJson"
-                rows="1"
-                cols="5"
-                class="textarea textarea-bordered custom-screen-width"
-                placeholder="Converted JSON will appear here"></textarea>
-            <button onclick={downloadConvertedJSON} class="btn btn-accent"
-                >Download JSON <Download /></button>
+                    class="textarea textarea-bordered custom-screen-width"
+                    cols="5"
+                    id="outputJson"
+                    placeholder="Converted JSON will appear here"
+                    rows="1"></textarea>
+            <button class="btn btn-accent" onclick={downloadConvertedJSON}
+            >Download JSON
+                <Download/>
+            </button>
         </div>
     </div>
 </article>

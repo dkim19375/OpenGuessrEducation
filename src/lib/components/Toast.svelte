@@ -1,6 +1,6 @@
 <script>
-    import { fade } from "svelte/transition";
-    import { onMount } from "svelte";
+    import {fade} from "svelte/transition";
+    import {onMount} from "svelte";
 
     let {
         message = "",
@@ -22,8 +22,8 @@
 
 {#if visible}
     <div
-        class="toast toast-top toast-end"
-        transition:fade={{ duration: 300 }}>
+            class="toast toast-top toast-end"
+            transition:fade={{ duration: 300 }}>
         <div class="alert {typeClass}">
             <span class="font-bold">{message}</span>
         </div>

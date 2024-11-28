@@ -1,8 +1,8 @@
 <script>
-    import { onMount } from "svelte";
+    import {onMount} from "svelte";
     import BaseOptionsQuiz from "$lib/components/BaseOptionsQuiz.svelte";
 
-    let { region, textDataPath = "/json/country-data/country-tld.json" } = $props();
+    let {region, textDataPath = "/json/country-data/country-tld.json"} = $props();
 
     let [a1, a2, a3, a4] = $state("");
 
@@ -15,7 +15,7 @@
 
     let questionsArray;
     let questionAmount = $state(0);
-    
+
     // svelte-ignore non_reactive_update
     let textData;
 
@@ -55,7 +55,7 @@
     async function startTextGame() {
         remainingQuestionsArray = await fetchQuestionsArray();
         await fetchTextData();
-        
+
         shuffleArray(remainingQuestionsArray);
         remainingQuestionsArray.splice(1, remainingQuestionsArray.length - 10);
 
@@ -101,7 +101,7 @@
                 const randomCountryIndex = Math.floor(
                     Math.random() * wrongAnswersPool.length,
                 );
-                
+
                 const randomCountry = wrongAnswersPool[randomCountryIndex];
                 // Splice --> removes entry from actual array, Slice --> removes entry only from new copy of array
                 wrongAnswersPool.splice(randomCountryIndex, 1); // Remove that one to avoid duplicates in the 3 wrong options
@@ -123,18 +123,18 @@
 </script>
 
 <BaseOptionsQuiz
-    answerOne={a1}
-    answerTwo={a2}
-    answerThree={a3}
-    answerFour={a4}
-    {questionAmount}
-    {question}
-    {correctAnswer}
-    {handleNextQuestion}
-    handleStartGame={startTextGame}>
+        answerFour={a4}
+        answerOne={a1}
+        answerThree={a3}
+        answerTwo={a2}
+        {correctAnswer}
+        {handleNextQuestion}
+        handleStartGame={startTextGame}
+        {question}
+        {questionAmount}>
     <div class="w-full flex justify-center items-center mb-4">
         {#if randomQuestion}
-        <h3 class="text-5xl font-bold my-5">{textData[randomQuestion]}</h3>
+            <h3 class="text-5xl font-bold my-5">{textData[randomQuestion]}</h3>
         {/if}
     </div>
 </BaseOptionsQuiz>

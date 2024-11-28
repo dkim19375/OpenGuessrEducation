@@ -1,11 +1,9 @@
 <script>
-    import { onMount } from "svelte";
-    import { Timer } from "lucide-svelte";
+    import {onMount} from "svelte";
+    import {Timer} from "lucide-svelte";
     import Map from "$lib/components/Map.svelte";
     import QuizResult from "./QuizResult.svelte";
-    import { playSound } from "$lib/utils/playSound";
-
-    import * as Icon from "svelte-flag-icons";
+    import {playSound} from "$lib/utils/playSound";
 
     let {
         region = "World",
@@ -181,14 +179,6 @@
         remainingFeatures.splice(index, 1);
 
         highlightedFeature = gameMode == "type" ? currentQuestion : null;
-
-        // Load flag if available
-        try {
-            IconComponent = Icon[countryCodes[currentQuestion]];
-        } catch (error) {
-            console.warn("Flag doesn't seem to exist:", error);
-            IconComponent = undefined;
-        }
     }
 
     function checkAnswer(answer) {
@@ -304,25 +294,25 @@
             <!-- svelte-ignore a11y_click_events_have_key_events -->
             <!-- svelte-ignore a11y_missing_attribute -->
             <!-- svelte-ignore a11y_interactive_supports_focus -->
-            <div role="tablist" class="tabs tabs-boxed bg-base-300 custom-tabs">
+            <div class="tabs tabs-boxed bg-base-300 custom-tabs" role="tablist">
                 <a
-                    role="tab"
-                    class="tab tab-sm"
-                    class:tab-active={gameMode === "click"}
-                    onclick={() => changeGameMode("click")}>Click</a>
+                        class="tab tab-sm"
+                        class:tab-active={gameMode === "click"}
+                        onclick={() => changeGameMode("click")}
+                        role="tab">Click</a>
                 <a
-                    role="tab"
-                    class="tab tab-sm"
-                    class:tab-active={gameMode === "type"}
-                    onclick={() => changeGameMode("type")}>Type</a>
+                        class="tab tab-sm"
+                        class:tab-active={gameMode === "type"}
+                        onclick={() => changeGameMode("type")}
+                        role="tab">Type</a>
                 <a
-                    role="tab"
-                    class="tab tab-sm"
-                    class:tab-active={gameMode === "learn"}
-                    onclick={() => changeGameMode("learn")}>Learn</a>
+                        class="tab tab-sm"
+                        class:tab-active={gameMode === "learn"}
+                        onclick={() => changeGameMode("learn")}
+                        role="tab">Learn</a>
             </div>
             <div class="flex items-center gap-2 bg-base-300 rounded-lg p-1">
-                <Timer class="w-5 h-5" />
+                <Timer class="w-5 h-5"/>
                 <span class="text-base min-w-10 text-center">{timeString}</span>
             </div>
         </div>
@@ -331,24 +321,24 @@
     <div class="map-wrapper">
         {#key uniqueMap}
             <Map
-                bind:this={quizMap}
-                {region}
-                {zoom}
-                width={screenWidth}
-                height={screenHeight}
-                on:click={handleMapClick}
-                interactive={true}
-                {minLabelZoom}
-                {highlightedFeature}
-                {topoJsonName}
-                dynamicHeight="true"
-                showPoints="true"
-                showLabels={gameMode === "learn"}
-                afterLoad={handleMapLoad}>
+                    bind:this={quizMap}
+                    {region}
+                    {zoom}
+                    width={screenWidth}
+                    height={screenHeight}
+                    on:click={handleMapClick}
+                    interactive={true}
+                    {minLabelZoom}
+                    {highlightedFeature}
+                    {topoJsonName}
+                    dynamicHeight="true"
+                    showPoints="true"
+                    showLabels={gameMode === "learn"}
+                    afterLoad={handleMapLoad}>
                 {#if IconComponent}
                     <div
-                        class="absolute z-20 top-3 right-3 rounded-md bg-base-200 py-0.5 p-2">
-                        <IconComponent size="50" />
+                            class="absolute z-20 top-3 right-3 rounded-md bg-base-200 py-0.5 p-2">
+                        <IconComponent size="50"/>
                     </div>
                 {/if}
             </Map>
@@ -358,21 +348,22 @@
     {#if gameMode === "type"}
         <div class="mt-4 relative">
             <input
-                type="text"
-                bind:value={userInput}
-                onfocus={handleFocus}
-                onblur={handleBlur}
-                onkeypress={(e) => e.key === "Enter" && handleInputSubmit()}
-                onkeydown={(e) => {
+                    type="text"
+                    bind:value={userInput}
+                    onfocus={handleFocus}
+                    onblur={handleBlur}
+                    onkeypress={(e) => e.key === "Enter" && handleInputSubmit()}
+                    onkeydown={(e) => {
                     if (e.key === "Tab") userInput = regionNamesAutocomplete[0];
                 }}
-                placeholder={inputPlaceholderHint}
-                class="input input-bordered w-full" />
+                    placeholder={inputPlaceholderHint}
+                    class="input input-bordered w-full"/>
             <button
-                class="btn btn-secondary btn-sm mt-2 mb-2 absolute right-2"
-                onclick={handleInputSubmit}>Submit</button>
+                    class="btn btn-secondary btn-sm mt-2 mb-2 absolute right-2"
+                    onclick={handleInputSubmit}>Submit
+            </button>
             <div
-                class="absolute w-full top-16 bg-accent shadow-lg transition-opacity p-4 flex flex-col gap-2 rounded-lg z-20 max-h-52 overflow-auto outline outline-accent {showTypeAutoComplete
+                    class="absolute w-full top-16 bg-accent shadow-lg transition-opacity p-4 flex flex-col gap-2 rounded-lg z-20 max-h-52 overflow-auto outline outline-accent {showTypeAutoComplete
                     ? 'opacity-100'
                     : 'opacity-0'}">
                 {#if regionNamesAutocomplete.length > 0}
@@ -380,8 +371,8 @@
                         <!-- svelte-ignore a11y_click_events_have_key_events -->
                         <!-- svelte-ignore a11y_no_static_element_interactions -->
                         <div
-                            class="rounded-md w-full px-2 bg-base-200 hover:bg-base-100 transition-colors cursor-pointer"
-                            onclick={() => {
+                                class="rounded-md w-full px-2 bg-base-200 hover:bg-base-100 transition-colors cursor-pointer"
+                                onclick={() => {
                                 userInput = regionName;
                             }}>
                             <p>{regionName}</p>
@@ -396,7 +387,7 @@
     <!-- result screen -->
     <!-- replace gameOver with true for testing -->
     {#if gameOver}
-        <QuizResult {score} {errors} {timeString} {startGame} />
+        <QuizResult {score} {errors} {timeString} {startGame}/>
     {/if}
 </div>
 

@@ -1,12 +1,12 @@
 <script>
-    import { onMount } from "svelte";
+    import {onMount} from "svelte";
     import BaseOptionsQuiz from "$lib/components/BaseOptionsQuiz.svelte";
     import * as Icon from "svelte-flag-icons";
 
-    let { region } = $props();
+    let {region} = $props();
 
     let [a1, a2, a3, a4] = $state("");
-    
+
     // svelte-ignore state_referenced_locally
     const answers = [a1, a2, a3, a4];
 
@@ -132,18 +132,18 @@
 </script>
 
 <BaseOptionsQuiz
-    answerOne={a1}
-    answerTwo={a2}
-    answerThree={a3}
-    answerFour={a4}
-    {questionAmount}
-    {question}
-    {correctAnswer}
-    {handleNextQuestion}
-    handleStartGame={startFlagGame}>
+        answerFour={a4}
+        answerOne={a1}
+        answerThree={a3}
+        answerTwo={a2}
+        {correctAnswer}
+        {handleNextQuestion}
+        handleStartGame={startFlagGame}
+        {question}
+        {questionAmount}>
     <div class="w-full flex justify-center items-center mb-2">
         {#if IconComponent}
-            <IconComponent size={dynamicSize} />
+            <IconComponent size={dynamicSize}/>
         {/if}
     </div>
 </BaseOptionsQuiz>

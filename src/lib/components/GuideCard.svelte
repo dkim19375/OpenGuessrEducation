@@ -1,6 +1,5 @@
 <script>
-    import { onMount } from "svelte";
-    import { onDestroy } from "svelte";
+    import {onMount} from "svelte";
 
     let {
         title = "This is an awesome guide.",
@@ -25,18 +24,18 @@
 </script>
 
 <div
-    class="card {mobile
+        class="card {mobile
         ? 'image-full'
         : 'card-side'} bg-base-200 shadow-md hover:shadow-xl transition-shadow duration-300 {mobile ? 'max-h-64' : ''} overflow-hidden">
     <figure class="relative {mobile ? 'max-h-64' : ''} {mobile ? 'dark:brightness-50' : 'dark:opacity-80'}">
         <img
-            src="/assets/guide_preview.png"
-            class="h-full {mobile ? 'w-64' : 'w-48'}"
-            style="filter: hue-rotate({hueRotate}deg)"
-            alt="Guide preview" />
+                alt="Guide preview"
+                class="h-full {mobile ? 'w-64' : 'w-48'}"
+                src="/assets/guide_preview.png"
+                style="filter: hue-rotate({hueRotate}deg)"/>
         <div class="absolute h-full w-full">
             <div
-                class="flex justify-center items-center w-full h-full text-base-200">
+                    class="flex justify-center items-center w-full h-full text-base-200">
                 {@render children?.()}  <!-- formerly <slot /> in Svelte 4 -->
             </div>
         </div>
@@ -46,9 +45,9 @@
         <p class="text-wrap max-h-24 text-clip">{description}</p>
         <div class="card-actions justify-end mt-auto -mb-1">
             <a
-                class="btn btn-secondary btn-md"
-                style="filter: hue-rotate({hueRotate}deg)"
-                {href}>Read</a>
+                    class="btn btn-secondary btn-md"
+                    {href}
+                    style="filter: hue-rotate({hueRotate}deg)">Read</a>
         </div>
     </div>
 </div>

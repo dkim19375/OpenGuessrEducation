@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from "svelte";
+    import {onMount} from "svelte";
     import BaseOptionsQuiz from "$lib/components/BaseOptionsQuiz.svelte";
     import * as Icon from "svelte-flag-icons";
 
@@ -84,19 +84,19 @@
 
         try {
             switch (correctAnswer) {
-                    case 1:
-                        flag1Icon = Icon[countryCodes[randomQuestion]];
-                        break;
-                    case 2:
-                        flag2Icon = Icon[countryCodes[randomQuestion]];
-                        break;
-                    case 3:
-                        flag3Icon = Icon[countryCodes[randomQuestion]];
-                        break;
-                    case 4:
-                        flag4Icon =  Icon[countryCodes[randomQuestion]];
-                        break;
-                }
+                case 1:
+                    flag1Icon = Icon[countryCodes[randomQuestion]];
+                    break;
+                case 2:
+                    flag2Icon = Icon[countryCodes[randomQuestion]];
+                    break;
+                case 3:
+                    flag3Icon = Icon[countryCodes[randomQuestion]];
+                    break;
+                case 4:
+                    flag4Icon = Icon[countryCodes[randomQuestion]];
+                    break;
+            }
         } catch (error) {
             console.warn("Flag doesn't seem to exist:", error);
             IconComponent = undefined;
@@ -164,15 +164,15 @@
 </script>
 
 <BaseOptionsQuiz
-    answerOne="1"
-    answerTwo="2"
-    answerThree="3"
-    answerFour="4"
-    {questionAmount}
-    {question}
-    {correctAnswer}
-    {handleNextQuestion}
-    handleStartGame={startFlagGame}>
+        answerFour="4"
+        answerOne="1"
+        answerThree="3"
+        answerTwo="2"
+        {correctAnswer}
+        {handleNextQuestion}
+        handleStartGame={startFlagGame}
+        {question}
+        {questionAmount}>
     <div class="w-full flex justify-center items-center flex-col mb-2">
         {#if flag1Icon}
             {@const SvelteComponent = flag1Icon}
@@ -180,11 +180,11 @@
             <div class="flex gap-5 relative">
                 <div class="flex relative">
                     <p class="absolute -left-5 top-7">1.</p>
-                    <SvelteComponent size={dynamicSize} />
+                    <SvelteComponent size={dynamicSize}/>
                 </div>
                 <div class="flex relative">
                     <p class="absolute -right-7 top-7">2.</p>
-                    <SvelteComponent_1 size={dynamicSize} />
+                    <SvelteComponent_1 size={dynamicSize}/>
                 </div>
             </div>
             {@const SvelteComponent_2 = flag3Icon}
@@ -192,11 +192,11 @@
             <div class="flex mt-8 gap-5 relative">
                 <div class="margin-adjust relative">
                     <p class="absolute -left-5 top-7">3.</p>
-                    <SvelteComponent_2 size={dynamicSize} />
+                    <SvelteComponent_2 size={dynamicSize}/>
                 </div>
                 <div class="margin-adjust relative">
                     <p class="absolute -right-7 top-7">4.</p>
-                    <SvelteComponent_3 size={dynamicSize} />
+                    <SvelteComponent_3 size={dynamicSize}/>
                 </div>
             </div>
         {/if}

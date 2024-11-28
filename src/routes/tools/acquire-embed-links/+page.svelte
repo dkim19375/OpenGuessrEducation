@@ -1,6 +1,6 @@
 <script>
-    import { onMount } from "svelte";
-    import { setTitle } from "$lib/utils/pageTitle.svelte.js";
+    import {onMount} from "svelte";
+    import {setTitle} from "$lib/utils/pageTitle.svelte.js";
 
     onMount(() => {
         setTitle("How to Embed Google Street View in an Article");
@@ -11,28 +11,30 @@
     <h1 class="text-4xl font-bold mb-8">How to get Embed Links from Google Street View </h1>
 
     <p class="mb-4 max-w-2xl">
-        Let's take a quick look at how you can get the <b>correct link</b> to use for embeds in your article from Google Street View.
+        Let's take a quick look at how you can get the <b>correct link</b> to use for embeds in your article from Google
+        Street View.
     </p>
     <ul class="list list-decimal list-inside mb-4 max-w-2xl">
         <li>
-            First, visit <a href="https://www.google.com/maps/" target="_blank" class="text-secondary">Google Maps</a> on a desktop computer and open a Street View.
-            <img src="/assets/tools/embed_tutorial_1.png" class="h-40 w-72 object-cover" alt="embed tutorial">
+            First, visit <a class="text-secondary" href="https://www.google.com/maps/" target="_blank">Google Maps</a>
+            on a desktop computer and open a Street View.
+            <img alt="embed tutorial" class="h-40 w-72 object-cover" src="/assets/tools/embed_tutorial_1.png">
         </li>
         <li>
             Then, select the <b>embed</b> option from the menu with 3-dots.
-            <img src="/assets/tools/embed_tutorial_2.png" class="h-30 w-72 object-cover" alt="embed tutorial">
+            <img alt="embed tutorial" class="h-30 w-72 object-cover" src="/assets/tools/embed_tutorial_2.png">
         </li>
         <li>
             Now, select the <b>Embed a Map</b> option.
-            <img src="/assets/tools/embed_tutorial_3.png" class="h-40 w-72 object-cover" alt="embed tutorial">
+            <img alt="embed tutorial" class="h-40 w-72 object-cover" src="/assets/tools/embed_tutorial_3.png">
         </li>
         <li>
             Then, copy the HTML.
-            <img src="/assets/tools/embed_tutorial_4.png" class="h-7 w-72 object-cover" alt="embed tutorial">
+            <img alt="embed tutorial" class="h-7 w-72 object-cover" src="/assets/tools/embed_tutorial_4.png">
         </li>
         <li>
             Lastly, extract only the URL ("src", the source) from this code.
-            <img src="/assets/tools/embed_tutorial_5.png" class="h-8 w-96 object-cover" alt="embed tutorial">
+            <img alt="embed tutorial" class="h-8 w-96 object-cover" src="/assets/tools/embed_tutorial_5.png">
         </li>
         <li>
             You can now use this link in the Article Embed Component like so.<br>
