@@ -1,6 +1,5 @@
 <script>
     import "../app.css";
-    import Footer from "$lib/components/Footer.svelte";
     import {onMount} from 'svelte';
     import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
 
@@ -43,12 +42,9 @@
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col">
         <!-- The main content where route content will be displayed -->
-        <main class="flex-1 p-6 overflow-y-auto w-full mt-16 mb-16 lg:mt-0 overflow-x-hidden">
+        <main class="flex-1 p-6 overflow-y-auto w-full mt-16 lg:mt-0 overflow-x-hidden">
             {@render children?.()}  <!-- formerly <slot /> in Svelte 4 -->
         </main>
-
-        <!-- Footer -->
-        <Footer/>
     </div>
 </div>
 

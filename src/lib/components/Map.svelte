@@ -919,7 +919,7 @@
     }
 
     .dynamic-viewport-height {
-        height: 50dvh;
+        height: 60dvh;
     }
 
 

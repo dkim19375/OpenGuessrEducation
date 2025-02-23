@@ -26,7 +26,7 @@
 <article class="container mx-auto p-6 px-1 max-w-6xl">
 
     <!-- Display the current quiz title -->
-    <h1 class="text-4xl font-bold mb-8 mt-4">Africa Quiz</h1>
+    <h1 class="text-4xl font-bold mb-8 mt-4">Africa Quiz (AP World)</h1>
 
     <!-- Slot for quiz content -->
     {@render children?.()}
