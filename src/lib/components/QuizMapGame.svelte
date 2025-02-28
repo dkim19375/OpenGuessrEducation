@@ -4,6 +4,7 @@
     import Map from "$lib/components/Map.svelte";
     import QuizResult from "./QuizResult.svelte";
     import {playSound} from "$lib/utils/playSound";
+    import {timesPlayed} from "$lib/stores/historyData.js";
 
     let {
         region = "World",
@@ -244,6 +245,7 @@
     function endGame() {
         gameOver = true;
         stopTimer();
+        timesPlayed.update((n) => n + 1);
     }
 
     function changeGameMode(mode) {

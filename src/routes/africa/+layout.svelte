@@ -1,5 +1,6 @@
 <script>
     import {page} from "$app/stores"; // To get the current URL
+    import {timesPlayed} from "$lib/stores/historyData.js";
 
     let {children} = $props();
 
@@ -26,7 +27,10 @@
 <article class="container mx-auto p-6 px-1 max-w-6xl">
 
     <!-- Display the current quiz title -->
-    <h1 class="text-4xl font-bold mb-8 mt-4">Africa Quiz (AP World)</h1>
+    <div class="flex w-full justify-between content-baseline">
+        <h1 class="text-4xl font-bold mb-8 mt-4 flex">Africa Quiz (AP World)</h1>
+        <span class="text-xl mt-8 flex">last-minute studying?{"!".repeat($timesPlayed)}</span>
+    </div>
 
     <!-- Slot for quiz content -->
     {@render children?.()}
